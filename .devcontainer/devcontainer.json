@@ -1,0 +1,5 @@
+{
+  "name": "OpenClaw Virtual",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "postCreateCommand": "sudo npm install -g openclaw@latest && echo 'OpenClaw installed! Run ./setup.sh to configure.'"
+}
