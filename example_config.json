@@ -1,0 +1,25 @@
+{
+  "channels": {
+    "telegram": {
+      "botToken": "YOUR_TELEGRAM_BOT_TOKEN_HERE",
+      "allowFrom": [
+        "YOUR_TELEGRAM_USER_ID"
+      ],
+      "enabled": true
+    },
+    "whatsapp": {
+      "dmPolicy": "open",
+      "allowFrom": [
+        "*"
+      ],
+      "enabled": true
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": "anthropic/claude-3-5-sonnet-20240620",
+      "thinking": "high"
+    }
+  },
+  "_instructions": "Save this file to ~/.openclaw/openclaw.json. Replace YOUR_TELEGRAM_BOT_TOKEN_HERE with your bot token and YOUR_TELEGRAM_USER_ID with your numeric user ID."
+}
