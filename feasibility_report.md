@@ -28,4 +28,4 @@ OpenClaw supports "Multi-Agent Routing" which allows you to route different chan
 *   **Agent A (Personal Assistant):** Connected to Telegram. Has access to your personal tools and data.
 *   **Agent B (Customer Support):** Connected to WhatsApp. Has restricted access (sandboxed) and specific instructions for handling customer queries.
 
-See `example_config.json` for a basic configuration example.
+See `config/openclaw.json` for a basic configuration example and `TELEGRAM_SETUP.md` for detailed setup instructions.
