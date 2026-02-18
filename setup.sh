@@ -14,12 +14,28 @@ fi
 
 echo "Welcome to OpenClaw Setup Wizard!"
 echo "This script will help you configure OpenClaw with Telegram and DeepSeek."
+echo "You can also optionally connect WhatsApp Business for consumer access."
 echo ""
 
 # Prompt for credentials
-read -p "Enter your Telegram Bot Token: " TELEGRAM_BOT_TOKEN
-read -p "Enter your Telegram User ID: " TELEGRAM_USER_ID
+read -p "Enter your Telegram Bot Token (from @BotFather): " TELEGRAM_BOT_TOKEN
+read -p "Enter your Telegram User ID (e.g., 123456789): " TELEGRAM_USER_ID
 read -p "Enter your DeepSeek API Key: " DEEPSEEK_API_KEY
+echo ""
+
+# Optional WhatsApp Configuration
+read -p "Do you want to enable WhatsApp for consumers (public access)? (y/n): " ENABLE_WHATSAPP
+WHATSAPP_CONFIG=""
+
+if [[ "$ENABLE_WHATSAPP" =~ ^[Yy]$ ]]; then
+  echo "Enabling WhatsApp for consumers..."
+  WHATSAPP_CONFIG="\"whatsapp\": {
+      \"dmPolicy\": \"open\",
+      \"allowFrom\": [\"*\"]
+    },"
+else
+  echo "Skipping WhatsApp configuration."
+fi
 
 echo ""
 echo "Installing OpenClaw..."
@@ -49,6 +65,10 @@ cat <<EOF > ~/.openclaw/openclaw.json
       "botToken": "$TELEGRAM_BOT_TOKEN",
       "dmPolicy": "allowlist",
       "allowFrom": ["tg:$TELEGRAM_USER_ID"]
+    },
+    $WHATSAPP_CONFIG
+    "web": {
+      "enabled": true
     }
   },
   "models": {
@@ -103,3 +123,6 @@ fi
 echo ""
 echo "Setup complete!"
 echo "To start the bot, run: openclaw gateway"
+if [[ "$ENABLE_WHATSAPP" =~ ^[Yy]$ ]]; then
+  echo "Note: For WhatsApp, verify the console output for a QR code or instructions to link your device."
+fi
